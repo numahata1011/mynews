@@ -1,26 +1,17 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-	<meta charset="utf-8">
-	<title>ローディングページ</title>
-<meta name="robots" content="noindex,nofollow">
-    <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/load.css') }}">
-</head>
+{{-- layouts/profile.blade.phpを読み込む --}}
+@extends('layouts.profile')
 
-<body>
-	<div id="splash">
-		<div id="splash_text"></div>
-	</div>
 
-	<main>
-        <div id="container">
-		<p>ローディング後、この画面。</p>
-	</div>
-	</main>
-<!--==============JQuery読み込み===============-->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/master/dist/progressbar.min.js"></script>
-<script src="{{ asset('js/load.js') }}"></script>
-</body>
-</html>
+{{-- profile.blade.phpの@yield('title')に'My プロフール'を埋め込む --}}
+@section('title', 'プロフィール')
+
+{{-- profile.blade.phpの@yield('content')に以下のタグを埋め込む --}}
+@section('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h2>My プロフール</h2>
+            </div>
+        </div>
+    </div>
+@endsection
