@@ -31,7 +31,7 @@
                                 <ul class="information-list">
                                     <li>2022/05/02 収束したコロナが新たな猛威を奮ってしまう。</li>
                                     <li>2022/04/01 コロナが収束しリベンジ消費で新たな旋風</li>
-                                    <li>2022/01/01 Batty's Coffee Standオープンしました。</li>
+                                    <li>2022/01/01 Side business LIFEオープンしました。</li>
                                 </ul>
                             </div>
                     </div>
