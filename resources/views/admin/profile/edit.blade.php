@@ -1,73 +1,52 @@
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Side business LIFE</title>
-    <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-  </head>
-  <body>
-        <header>
-          <div class="container">
-            <div class="header-title-area">
-              <h1 class="logo">Side business LIFE</h1>
-              <p class="text-sub">あなたに最高の副業を・・・</p>
-            </div>
-                <ul class="header-navigation">
-                    <li><a href="#">Blog(Affiliater)</a></li>
-                    <li><a href="#">MovieCreator</a></li>
-                    <li><a href="#">YouTuber</a></li>
-                    <li><a href="#">WebWriter</a></li>
-                    <li><a href="#">Programer</a></li>
-                </ul>
-          </div>
-        </header>
-        <div class="main">
-            <div class="container">
-                <div class="left-contents">
-                    <div class="card-contents">
-                        <h2 class="text-title">Information</h2>
-                            <div class="card-contents">
-                                <ul class="information-list">
-                                    <li>2022/05/02 収束したコロナが新たな猛威を奮ってしまう。</li>
-                                    <li>2022/04/01 コロナが収束しリベンジ消費で新たな旋風</li>
-                                    <li>2022/01/01 Side business LIFEオープンしました。</li>
-                                </ul>
-                            </div>
+@extends('layouts.admin')
+@section('title', 'content')
+
+@section('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h2>プロフィール編集</h2>
+                <form action="{{ action('Admin\ProfileController@update') }}" method="post" enctype="multipart/form-data">
+                    @if (count($errors) > 0)
+                        <ul>
+                            @foreach($errors->all() as $e)
+                                <li>{{ $e }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
+                    <div class="form-group row">
+                        <label class="col-md-2" for="name">氏名</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="name" value="{{ $profile_form->name }}">
+                        </div>
                     </div>
-                    <div class="card-contents">
-                        <h2 class="text-title">Staff</h2>
-                            <div class="card-contents">
-                                <div class="staff-list-area">
-                                    <div class="staff-list">
-                                        <img src="{{ asset('image/asuka.jpg') }}" class="staff-image">
-                                        <p class="staff-name">asuka</p>
-                                    </div>
-                                    <div class="staff-list">
-                                        <img src="{{ asset('image/rei.jpg') }}" class="staff-image">
-                                        <p class="staff-name">Rei</p>
-                                    </div>
-                                    <div class="staff-list">
-                                        <img src="{{ asset('image/mari.jpg') }}" class="staff-image">
-                                        <p class="staff-name">Mari</p>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="form-group row">
+                        <label class="col-md-2" for="gender">性別</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="gender" value="{{ $profile_form->gender }}">
+                        </div>
                     </div>
-                </div>
-                <div class="right-contents">
-                    <div class="card-contents">
-                        <h2 class="text-title">Access</h2>
-                            <div class="card-contents">
-                                <p>M78星雲2-6-2<br>グリーン北川206号室</p>
-                                <p>M78星雲ウルトラ駅より徒歩5分</p>
-                            </div>
+                    <div class="form-group row">
+                        <label class="col-md-2" for="hobby">趣味</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="hobby" value="{{ $profile_form->hobby }}">
+                        </div>
                     </div>
-                </div>
+                    <div class="form-group row">
+                        <label class="col-md-2" for="introduction">自己紹介欄</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" name="introduction"  rows="20">{{ $profile_form->introduction }}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-10">
+                            <input type="hidden" name="id" value="{{ $profile_form->id }}">
+                            {{ csrf_field() }}
+                            <input type="submit" class="btn btn-primary" value="更新">
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    <footer>
-        <p class="copyright">(C) Side business LIFE</p>
-    </footer>
-  </body>
-</html>
+    </div>
+@endsection
