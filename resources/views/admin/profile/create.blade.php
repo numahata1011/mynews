@@ -11,6 +11,7 @@
             <div class="col-md-8 mx-auto">
                 <h2>My プロフール</h2>
                 <form action="{{ action('Admin\ProfileController@create') }}" method="post" enctype="multipart/form-data">
+                <a href="{{ action('Admin\ProfileController@index') }}" role="button" class="btn btn-primary">Myプロフィール一覧</a>{{-- URLを直接打たないといけないので追加 --}}
                     @if (count($errors) > 0)
                         <ul>
                             @foreach($errors->all() as $e)
