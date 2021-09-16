@@ -45,3 +45,7 @@ Route::get('profile/delete', 'Admin\ProfileController@delete');// 追記(16’)
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/', 'NewsController@index');
+
+Route::get('profile', 'ProfileController@index');
