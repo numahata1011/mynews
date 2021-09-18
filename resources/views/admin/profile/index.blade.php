@@ -9,6 +9,7 @@
         <div class="row">
             <div class="col-md-4">
                 <a href="{{ action('Admin\ProfileController@add') }}" role="button" class="btn btn-primary">新規作成</a>
+                <a href="{{ action('Admin\ProfileController@index') }}" role="button" class="btn btn-primary">Myプロフィール一覧</a>{{-- URLを直接打たないといけないので追加 --}}
             </div>
             <div class="col-md-8">
                 <form action="{{ action('Admin\ProfileController@index') }}" method="get">
