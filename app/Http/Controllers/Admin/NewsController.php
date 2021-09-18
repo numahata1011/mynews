@@ -1,16 +1,16 @@
 <?php
 namespace App\Http\Controllers\Admin;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 // 以下を追記することでNews Modelが扱えるようになる
 use App\News;
-
 // 以下を追記(17)
 use App\History;
-
 // 以下を追記(17)※日付操作ライブラリ
 use Carbon\Carbon;
+// 以下を追記(31)※Herokuへの画像のアップロード
+use Storage;
 
 class NewsController extends Controller
 {
@@ -32,9 +32,9 @@ class NewsController extends Controller
       if (isset($form['image'])) {
         //storeメソッド、引数内のディレクトリに一意のファイル名として保存し、そこへのパスを返す
         //fileメソッド、画像をアップロードするメソッド
-        $path = $request->file('image')->store('public/image');
+        $path = Storage::disk('s3')->putFile('/',$form['image'],'public');//カリキュラム(30)変更、元は$path = $request->file('image')->store('public/image');
         //basenameメソッド、パスではなくファイル名だけ取得する
-        $news->image_path = basename($path);
+        $news->image_path = Storage::disk('s3')->url($path);//カリキュラム(30)変更、元は$news->image_path = basename($path);
       } else {
           $news->image_path = null;
       }
@@ -90,8 +90,8 @@ class NewsController extends Controller
       if ($request->remove == 'true') {
           $news_form['image_path'] = null;
       } elseif ($request->file('image')) {
-          $path = $request->file('image')->store('public/image');
-          $news_form['image_path'] = basename($path);
+          $path = Storage::disk('s3')->putFile('/',$news_form['image'],'public');//カリキュラム(30)変更、元は$path = $request->file('image')->store('public/image');
+          $news->image_path = Storage::disk('s3')->url($path);//カリキュラム(30)変更、元は$news->image_path = basename($path);
       } else {
           $news_form['image_path'] = $news->image_path;
       }
@@ -101,6 +101,7 @@ class NewsController extends Controller
       unset($news_form['_token']);
 
       // 該当するデータを上書きして保存する
+      //$news->fill($news_form);,$news->save();を短縮して書いたもの
       $news->fill($news_form)->save();
       
       // 以下を追記(17)
